@@ -1,0 +1,29 @@
+-- This query evaluates the performance of the newly created model using a portion of the cleaned data.
+-- It uses the same dataset and column renaming logic from your previous query.
+SELECT *
+FROM
+  ML.EVALUATE(MODEL `eveonegcp.mdl_real_estate_automl`,
+    (SELECT
+        `ID` AS `id`,
+        `都道府県名` AS `prefecture_name`,
+        `市区町村名` AS `city_name`,
+        `地区名` AS `district_name`,
+        `最寄駅_名称` AS `nearest_station_name`,
+        CAST(`最寄駅_距離_分_` AS FLOAT64) AS `distance_to_station_minutes`,
+        `間取り` AS `layout`,
+        CAST(`面積___` AS FLOAT64) AS `area_sqm`,
+        SAFE_CAST(LEFT(`建築年`, 4) AS INT64) AS `construction_year`,
+        `建物の構造` AS `building_structure`,
+        `都市計画` AS `city_planning`,
+        CAST(`建ぺい率___` AS FLOAT64) AS `building_coverage_ratio`,
+        CAST(`容積率___` AS FLOAT64) AS `floor_area_ratio`,
+        `取引時点` AS `transaction_date`,
+        SAFE_CAST(`取引価格_総額__log` AS FLOAT64) AS `total_transaction_price_log`,
+        (SAFE_CAST(`取引価格_総額__log` AS FLOAT64) > 8.0) AS `is_expensive`
+    FROM
+      `test2-465413.eveonegcp.cleaned`
+    WHERE
+      SAFE_CAST(`取引価格_総額__log` AS FLOAT64) IS NOT NULL
+      AND SAFE_CAST(`取引価格_総額__log` AS FLOAT64) > 0
+    )
+  );
