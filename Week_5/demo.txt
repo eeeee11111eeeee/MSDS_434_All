@@ -1,0 +1,65 @@
+select * from `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+
+ 
+
+select * from `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+
+#standardSQL
+CREATE MODEL `alfred.sample_model13`
+OPTIONS(model_type='logistic_reg',
+       input_label_cols=['isBuyer'])
+AS
+SELECT
+ IF(totals.transactions IS NULL, 0, 1) AS isBuyer,
+ IFNULL(totals.pageviews, 0) AS pageviews,
+ IFNULL(totals.timeOnSite, 0) AS timeOnSite,
+ IFNULL(totals.newVisits, 0) AS isNewVisit,
+ IF(device.deviceCategory = 'mobile', 1, 0) AS isMobile,
+ IF(device.deviceCategory = 'desktop', 1, 0) AS isDesktop,
+ IF(trafficSource.medium in ('affiliate', 'cpc', 'cpm'), 1, 0) AS isPaidTraffic
+FROM
+ `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+WHERE
+ _TABLE_SUFFIX BETWEEN '20160801' AND '20160901'
+
+ 
+
+SELECT *
+FROM ML.EVALUATE(MODEL `davidsdataset.sample_model13`,
+   (
+     SELECT
+        IF(totals.transactions IS NULL, 0, 1) AS isBuyer,
+        IFNULL(totals.pageviews, 0) AS pageviews,
+        IFNULL(totals.timeOnSite, 0) AS timeOnSite,
+        IFNULL(totals.newVisits, 0) AS isNewVisit,
+        IF(device.deviceCategory = 'mobile', 1, 0) AS isMobile,
+        IF(device.deviceCategory = 'desktop', 1, 0) AS isDesktop,
+        IF(trafficSource.medium in ('affiliate', 'cpc', 'cpm'), 1, 0) AS isPaidTraffic
+     FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+     WHERE
+        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'
+   ),
+   STRUCT(0.5 AS threshold)
+   )
+
+ 
+
+
+#standardSQL
+SELECT *
+FROM ML.PREDICT(MODEL `davidsdataset.sample_model14`,
+   (
+     SELECT
+        IFNULL(totals.pageviews, 0) AS pageviews,
+        IFNULL(totals.timeOnSite, 0) AS timeOnSite,
+        IFNULL(totals.newVisits, 0) AS isNewVisit,
+        IF(device.deviceCategory = 'mobile', 1, 0) AS isMobile,
+        IF(device.deviceCategory = 'desktop', 1, 0) AS isDesktop,
+        IF(trafficSource.medium in ('affiliate', 'cpc', 'cpm'), 1, 0) AS isPaidTraffic
+     FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+     WHERE
+        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'
+   )
+   )
