@@ -1,0 +1,18 @@
+echo "# MSDS_434_Week2" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://eeeee11111eeeee:ghp_*@github.com/eeeee11111eeeee/test.git
+
+git remote remove origin https://eeeee11111eeeee:ghp_*@github.com/eeeee11111eeeee/test.git
+git push -u origin main
+
+Git clone https://github.com/eeeee11111eeeee/MSDS_434_Week2
+
+git remote add origin https://github.com/eeeee11111eeeee/test
+https://github.com/eeeee11111eeeee/123
+
+git remote add origin https://eeeee11111eeeee:ghp_*@github.com/eeeee11111eeeee/123.git
+
+git remote remove origin https://eeeee11111eeeee:ghp_*@github.com/eeeee11111eeeee/123.git
