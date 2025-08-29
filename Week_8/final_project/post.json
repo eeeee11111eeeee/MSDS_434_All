@@ -1,0 +1,16 @@
+{
+	"id": 1234567,
+	"prefecture_name": "東京都",
+	"city_name": "千代田区",
+	"district_name": "丸の内",
+	"nearest_station_name": "東京",
+	"distance_to_station_minutes": 5,
+	"layout": "２ＬＤＫ",
+	"area_sqm": 80,
+	"construction_year": 2020,
+	"building_structure": "ＲＣ",
+	"city_planning": "商業地域",
+	"building_coverage_ratio": 80,
+	"floor_area_ratio": 400,
+	"transaction_date": "2025-08-09"
+}
