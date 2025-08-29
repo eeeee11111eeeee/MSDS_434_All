@@ -1,0 +1,7 @@
+bq load \
+  --source_format=CSV \
+  --column_name_character_map=V2 \
+  --skip_leading_rows=1 \
+  --autodetect \
+  eveonegcp.japan_house_price \
+  gs://test123_eve/train_cleaned/*.csv
