@@ -1,0 +1,25 @@
+http://34.122.12.58:8501/v1/models/real_estate_price_model:predict
+
+{
+  "instances": [
+    {
+      "Area_sqm": 35,
+      "Building_Structure": "ＲＣ",
+      "Building_to_Land_Ratio": 80,
+      "City": "Kyoto Ward",
+      "City_Planning": "Commercial Zone",
+      "Distance_from_Station_min": 5,
+      "Floor_Area_Ratio": 500,
+      "Floor_Plan": "１LDK",
+      "Future_Use_Purpose": "",
+      "Prefecture": "Kyoto Prefecture",
+      "Renovation_Status": "Not Renovated",
+      "Transaction_Circumstances": "",
+      "Type": "Used Condominium, etc.",
+      "Usage": "Residential",
+      "Year_Built": "15",
+      "transaction_month": 12,
+      "transaction_year": 2023
+    }
+  ]
+}
