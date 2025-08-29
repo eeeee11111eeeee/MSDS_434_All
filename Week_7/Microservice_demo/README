@@ -1,0 +1,27 @@
+curl -X GET HTTP://ec2-34-222-53-60.us-west-2.compute.amazonaws.com:8080
+    2  curl -X GET HTTP://ec2-34-222-53-60.us-west-2.compute.amazonaws.com:8080/TEST
+    3  curl http://ec2-34-222-53-60.us-west-2.compute.amazonaws.com:8080/resources/123
+    4  curl http://ec2-34-222-53-60.us-west-2.compute.amazonaws.com:8080/resources/456/values
+    5  sudo apt-get update
+    6  sudo apt install golang-go
+    7  vi intro.go
+    8  go run intro.go
+    9  sudo apt install golang-github-gorilla-mux-dev
+   10  go mod init   gorilla/mux
+   11  cat go.mod
+   12  go mod tidy
+   13  go get github.com/gorilla/mux
+   14  vi intro_two.go
+   15  go run intro_two.go
+   16  ls
+   17  cat intro.go
+   18  ls
+   19  cat intro_two.go
+   20  ls
+   21  cd go
+   22  ls
+   23  cd ..
+   24  ls
+   25  vi intro.go
+   26  vi intro_two.go
+   27  history
