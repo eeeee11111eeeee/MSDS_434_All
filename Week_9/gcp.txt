@@ -1,0 +1,24 @@
+curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
+sudo bash add-google-cloud-ops-agent-repo.sh --also-install
+
+Sudo apt-get update
+
+Sudo apt-get -y install apache2-utils
+
+
+package main
+
+import(
+“log”
+“net/http”
+)
+
+func helloGoHandler(w http.ResponseWriter, r “http.Request){
+w.Write([]byte(”hello” net/http!\n”))
+}
+
+func main(){
+http.HandleFunc(“/“, helloGoHandler)
+log.Fatal(http.ListenAndServe(“:9000”, nil))
+
+} 
