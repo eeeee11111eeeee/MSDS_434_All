@@ -1,0 +1,22 @@
+select * from `bigquery-public-data.ml_datasets.credit_card_default` limit 100;
+
+
+create or replace model `credit.mdl_automl_purchase_two`
+options(model_type='AUTOML_CLASSIFIER', 
+OPTIMIZATION_OBJECTIVE = 'minimize_log_loss',input_label_cols=['default_payment_next_month']) AS 
+select * except (id, predicted_default_payment_next_month) from `bigquery-public-data.ml_datasets.credit_card_default`
+where id <= 28000 LIMIT 100
+
+select * 
+from 
+ML.EVALUATE(MODEL, `credit.mdl_automl_purchase`);
+
+SELECT *  FROM 
+ML.predict( MODEL credit.mdl_automl_purchase, 
+
+( select * except (id, predicted_default_payment_next_month)
+from `bigquery-public-data.ml-datasets.credit_card_default
+where id > 28000
+)
+)
+;
