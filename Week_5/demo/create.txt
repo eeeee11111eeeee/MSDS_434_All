@@ -1,0 +1,31 @@
+#standardSQL
+CREATE MODEL `eveonegcp.sample_model13_real_estate`
+OPTIONS(model_type='linear_reg',
+       input_label_cols=['total_transaction_price_log'], -- Label column already English
+       data_split_method='AUTO_SPLIT',
+       L2_REG = 0.1
+       )
+AS
+SELECT
+    `ID` AS `id`, -- Renamed
+    `都道府県名` AS `prefecture_name`, -- Renamed
+    `市区町村名` AS `city_name`, -- Renamed
+    `地区名` AS `district_name`, -- Renamed
+    `最寄駅_名称` AS `nearest_station_name`, -- Renamed
+    CAST(`最寄駅_距離_分_` AS FLOAT64) AS `distance_to_station_minutes`, -- Renamed and cast
+    `間取り` AS `layout`, -- Renamed
+    CAST(`面積___` AS FLOAT64) AS `area_sqm`, -- Renamed and cast
+    SAFE_CAST(LEFT(`建築年`, 4) AS INT64) AS `construction_year`, -- Renamed and cast
+    `建物の構造` AS `building_structure`, -- Renamed
+    `都市計画` AS `city_planning`, -- Renamed
+    CAST(`建ぺい率___` AS FLOAT64) AS `building_coverage_ratio`, -- Renamed and cast
+    CAST(`容積率___` AS FLOAT64) AS `floor_area_ratio`, -- Renamed and cast
+    `取引時点` AS `transaction_date`, -- Renamed
+    SAFE_CAST(`取引価格_総額__log` AS FLOAT64) AS `total_transaction_price_log` -- Label, already English
+
+FROM
+    `test2-465413.eveonegcp.cleaned`
+WHERE
+    -- The WHERE clause still refers to the original source column name for filtering
+    SAFE_CAST(`取引価格_総額__log` AS FLOAT64) IS NOT NULL
+    AND SAFE_CAST(`取引価格_総額__log` AS FLOAT64) > 0
