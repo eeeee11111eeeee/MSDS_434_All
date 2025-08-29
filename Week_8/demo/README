@@ -1,0 +1,24 @@
+// t2. (free tier)
+
+
+cd rabbitMQ/
+
+sudo apt update
+sudo snap install docker
+sudo docker pull rabbitmq
+
+sudo docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management
+
+// remember to set the security rule on aws to allow access with the console
+
+// run rabbitmq server!   
+// http://<dns>:15672
+
+// you can log into the mq server as "guest" / "guest" for uname / pw
+
+sudo apt install golang-go
+vi prod.go
+go install github.com/streadway/amqp@latest
+go mod init github.com/TutorialEdite/go-rabbitmq-tutorial
+go mod tidy
+go run prod.go
